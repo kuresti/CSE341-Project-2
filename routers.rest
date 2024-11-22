@@ -1,0 +1,58 @@
+### GET Request All Contacts
+GET http://localhost:3000/
+
+### GET Request Single Contact by ID
+GET http://localhost:3000/recipes
+
+### POST Create New Contact
+POST http://localhost:3000/recipes HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Shredded BBQ Pork",
+  "description": "Dairy-Free, Diabetic, Gluten-Free, Ketogenic, Lower Sodium",
+  "cooking_time": "6-8",
+  "servings": "8",
+  "materials": "1 gallon-sized freezer bag",
+  "instructions": {
+    "to_freeze_and_cook_later": [
+      "1. Label your freezer bag with the name of the recipe, cooking instructions, and 'use-by' date.",
+      "2. Add all ingredients to your freezer bag.",
+      "3. Remove as much air as possible, seal, and freeze."
+    ],
+    "to_cook": [
+      "1. Thaw freezer bag overnight in refrigerator or in water in the morning.",
+      "2. Pour contents of freezer bag into your crockpot.",
+      "3. Cook on 'low' setting for 6-8 hours.",
+      "4. Shred pork and stir."
+    ]
+  }
+}
+
+### PUT Update Contact by ID
+PUT http://localhost:3000/recipes/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Shredded BBQ Pork",
+    "description": "Dairy-Free, Diabetic, Gluten-Free, Ketogenic, Lower Sodium",
+    "cooking_time": "6-8",
+    "servings": "8",
+    "materials": "1 gallon-sized freezer bag"
+    "instructions": {        
+        "to_freeze_and_cook_later": [
+            "1. Label your freezer bag with the name of the recipe, cooking instructions, and 'use-by' date.",
+            "2. Add all ingredients to your freezer bag.",
+            "3. Remove as much air as possible, seal, and freeze."
+            ],
+        "to_cook": [
+            "1. Thaw freezer bag overnight in refrigerator or in water in the morning.",
+            "2. Pour contents of freezer bag into your crockpot.",
+            "3. Cook on 'low' setting for 6-8 hours.",
+            "4. Shred pork and stir."
+        ]
+    }
+}
+
+### DELETE Contact By ID
+DELETE http://localhost:3000/recipes/6737f06d4547879d9ec810b9
