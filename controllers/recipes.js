@@ -36,7 +36,7 @@ const createNewRecipe = async(req, res) => {
     // #swagger.tag=['Recipes']
     const newRecipe = {
         title: req.body.title,
-        description: req.body.description,
+        author: req.body.author,
         cooking_time: req.body.cooking_time,
         servings: req.body.servings,
         materials: req.body.materials,
@@ -76,14 +76,24 @@ const updateRecipe = async(req, res) => {
  * DELETE Recipe
  * ***********************************/
 const deleteRecipe = async(req,res) => {
-    // #swagger.tag=['Contacts']
-   const recipeId = new ObjectId(req.params.id);
-   const response = await mongodb.getDb().collection('recipes').deleteOne({ _id: recipeId });
-   if (response.deletedCount > 0) {
-    res.status(204).send();
-   } else {
-    res.status(500).json(response.error || 'An error occurred while deleting recipe.');
-   }
+    // #swagger.tag=['Recipes']
+    try {
+        // Validate recipeId
+        const recipeId = req.params.id
+        if (!ObjectId.isValid(recipeId)) {
+            return res.status(400).json({ error: 'Invalid recipe ID' });
+        }
+
+        const response = await mongodb.getDb().collection('recipes').deleteOne({ _id: new ObjectId(recipeId) });
+        if (response.deletedCount > 0) {
+            res.status(204).send();
+           } else {
+                return res.status(400).json({ error: 'Recipe not found' });
+           }
+    } catch (err) {
+        console.error('Error deleting recipe:', err)
+        return res.status(500).json({ error: 'An error occurred while deleting the recipe.'})
+    }  
 };
  
     
