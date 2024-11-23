@@ -4,8 +4,8 @@
 const express = require('express');
 const router = express.Router();
 const recipesCont = require('../controllers/recipes');
-//onst validate = require('../validation/validation');
-//const { handleErrors } = require('../utilities/validate');
+const validate = require('../validation/validate');
+const { handleErrors } = require('../utilities/validation');
 
 
 /* *******************************
@@ -13,28 +13,30 @@ const recipesCont = require('../controllers/recipes');
  * *******************************/
 router.get('/', recipesCont.getAll);
 
-router.get('/recipes/:id', recipesCont.getSingle);
+router.get('/:id', handleErrors(recipesCont.getSingle));
 
 /* *******************************
  * POST Routes
  * *******************************/
 router.post(
     '/', 
-    // validate.recipesRules(),
-    // validate.validateRecipes,
-   recipesCont.createNewRecipe
+    validate.recipesRules(),
+    validate.validateRecipes,
+   handleErrors(recipesCont.createNewRecipe)
 )
+
 /* *******************************
  * PUT Routes
  * *******************************/
-router.put('/recipes/:id', 
-    // validate.recipesRules(),
-    // validate.validateRecipes,
-    recipesCont.updateRecipe
+router.put('/:id', 
+    validate.recipesRules(),
+    validate.validateRecipes,
+    handleErrors(recipesCont.updateRecipe)
 )
+
 /* *******************************
  * DELETE Routes
  * *******************************/
-router.delete('/recipes/:id', recipesCont.deleteRecipe);
+router.delete('/:id', handleErrors(recipesCont.deleteRecipe));
 
 module.exports = router;
