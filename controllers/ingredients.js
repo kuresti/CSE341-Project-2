@@ -8,7 +8,7 @@ const ObjectId = require('mongodb').ObjectId;
  * Get all from CSE-Project-2 Ingredients
  * ********************************/
 const getAll = async(req, res) => {
-    // #swagger.tag=['Ingredients']
+    //#swagger.tag=['Ingredients']
     const result = await mongodb.getDb().collection('ingredients').find();
     result.toArray().then((ingredients) => {
         res.setHeader('Content-Type', 'application/json');
