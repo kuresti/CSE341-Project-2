@@ -1,31 +1,97 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "My API",
-    "description": "Recipes",
+    "title": "Recipe API",
+    "description": "Recipe API",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https",
-    "http"
+    "https"
   ],
   "paths": {
-    "/recipes": {
+    "/": {
       "get": {
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/recipes/": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       },
       "post": {
-        "description": "",
+        "description": "Create New Recipe",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any",
+                  "type": "string"
+                },
+                "author": {
+                  "example": "any",
+                  "type": "string"
+                },
+                "cooking_time": {
+                  "example": "any",
+                  "type:": "string"
+                },
+                "servings": {
+                  "example": "any",
+                  "type": "integer"
+                },
+                "materials": {
+                  "example": "any",
+                  "type": "string"
+                },
+                "instructions": {
+                  "type": "object",
+                  "properties": {
+                    "to_freeze_and_cook_later": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }                      
+                    },
+                    "to_cook": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                 }
+                }
+              }
+            }          
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -33,9 +99,20 @@
     "/recipes/{id}": {
       "get": {
         "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       },
@@ -47,11 +124,58 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "author": {
+                  "example": "any"
+                },
+                "cooking_time": {
+                  "example": "any"
+                },
+                "servings": {
+                  "example": "any"
+                },
+                "materials": {
+                  "example": "any"
+                },
+                "instructions": {
+                  "type": "object",
+                  "properties": {
+                    "to_freeze_and_cook_later": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }                      
+                    },
+                    "to_cook": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
@@ -68,6 +192,365 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ingredients/": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ingredient_name": {
+                  "example": "any"
+                },
+                "ingredient_quantity": {
+                  "example": "any"
+                },
+                "ingredient_unit": {
+                  "example": "any"
+                },
+                "recipe_id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ingredients/{id}": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ingredient_name": {
+                  "example": "any"
+                },
+                "ingredient_quantity": {
+                  "example": "any"
+                },
+                "ingredient_unit": {
+                  "example": "any"
+                },
+                "recipe_id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/nutrition/": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "calories": {
+                  "example": "any"
+                },
+                "calories_unit": {
+                  "example": "any"
+                },
+                "polyunsaturated_fat": {
+                  "example": "any"
+                },
+                "polyunsaturated_fat_unit": {
+                  "example": "any"
+                },
+                "potassium": {
+                  "example": "any"
+                },
+                "potassium_unit": {
+                  "example": "any"
+                },
+                "carbohydrates": {
+                  "example": "any"
+                },
+                "carbohydrates_unit": {
+                  "example": "any"
+                },
+                "monounsaturated_fat": {
+                  "example": "any"
+                },
+                "monounsaturated_fat_unit": {
+                  "example": "any"
+                },
+                "fiber": {
+                  "example": "any"
+                },
+                "fiber_unit": {
+                  "example": "any"
+                },
+                "protein": {
+                  "example": "any"
+                },
+                "protein_unit": {
+                  "example": "any"
+                },
+                "fat": {
+                  "example": "any"
+                },
+                "fat_unit": {
+                  "example": "any"
+                },
+                "recipe_id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/nutrition/{id}": {
+      "get": {
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "calories": {
+                  "example": "any"
+                },
+                "calories_unit": {
+                  "example": "any"
+                },
+                "polyunsaturated_fat": {
+                  "example": "any"
+                },
+                "polyunsaturated_fat_unit": {
+                  "example": "any"
+                },
+                "potassium": {
+                  "example": "any"
+                },
+                "potassium_unit": {
+                  "example": "any"
+                },
+                "calcium": {
+                  "example": "any"
+                },
+                "calcium_unit": {
+                  "example": "any"
+                },
+                "carbohydrates": {
+                  "example": "any"
+                },
+                "carbohydrates_unit": {
+                  "example": "any"
+                },
+                "monounsaturated_fat": {
+                  "example": "any"
+                },
+                "monounsaturated_fat_unit": {
+                  "example": "any"
+                },
+                "fiber": {
+                  "example": "any"
+                },
+                "fiber_unit": {
+                  "example": "any"
+                },
+                "protein": {
+                  "example": "any"
+                },
+                "protein_unit": {
+                  "example": "any"
+                },
+                "fat": {
+                  "example": "any"
+                },
+                "fat_unit": {
+                  "example": "any"
+                },
+                "recipe_id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
