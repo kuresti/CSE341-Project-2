@@ -1,27 +1,21 @@
-/* **************************
+/* ********************************
  * Required Resources
- * **************************/
-const swaggerAutogen = require('swagger-autogen')();
+ * ********************************/
+const swaggerAutogen = require('swagger-autogen')
 
-/* **************************
- * Defines swagger doc
- * **************************/
+/* *********************************
+ * Creating swagger doc
+ * *********************************/
 const doc = {
     info: {
-        title: 'My API',
-        description: 'Recipes'
+        title: 'Recipe API',
+        description: 'Recipe API'
     },
     host: 'localhost:3000',
-    schemes: ['https', 'http'],
+    schemes: ['http', 'https']
 };
 
-/* ***************************
- * Routes
- * ***************************/
 const outputFile = './swagger.json';
-const endpointFiles = ['./routes/recipes.js']
+const endpointsFiles = ['./routes/index.js'];
 
-/* ***************************
- * Generates swagger.json
- * ***************************/
-swaggerAutogen(outputFile, endpointFiles, doc);
+swaggerAutogen(outputFile, endpointsFiles, doc);
