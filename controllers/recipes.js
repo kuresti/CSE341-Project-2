@@ -40,8 +40,10 @@ const createNewRecipe = async(req, res) => {
         cooking_time: req.body.cooking_time,
         servings: req.body.servings,
         materials: req.body.materials,
-        instructions: req.body.instructions
+        instructions: req.body.instructions,
     };
+         
+        console.log(newRecipe.instructions)
    const response = await mongodb.getDb().collection('recipes').insertOne(newRecipe);
    if (response.acknowledged) {
     res.status(204).send();
@@ -58,11 +60,11 @@ const updateRecipe = async(req, res) => {
     const recipeId = new ObjectId(req.params.id);
     const recipe = {
         title: req.body.title,
-        description: req.body.description,
+        author: req.body.author,
         cooking_time: req.body.cooking_time,
         servings: req.body.servings,
         materials: req.body.materials,
-        instructions: req.body.instructions
+        instructions: req.body.instructions       
     };
     const response = await mongodb.getDb().collection('recipes').replaceOne({_id: recipeId}, recipe);
     if(response.modifiedCount > 0) {
