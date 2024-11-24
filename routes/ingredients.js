@@ -10,7 +10,7 @@ const { handleErrors } = require('../utilities/validation');
 /* *******************************
  * Get Routes
  * *******************************/
-router.get('/', ingredientsCont.getAll);
+router.get('/', handleErrors(ingredientsCont.getAll));
 
 router.get('/:id', handleErrors(ingredientsCont.getSingle));
 
@@ -21,7 +21,7 @@ router.post(
     '/', 
     validate.ingredientsRules(),
     validate.validateIngredient,
-   handleErrors(ingredientsCont.createNewIngredient)
+    handleErrors(ingredientsCont.createNewIngredient)
 )
 
 /* *******************************
