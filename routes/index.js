@@ -27,6 +27,11 @@ router.use('/recipes', require('./recipes'));
  * ******************************/
 router.use('/ingredients', require('./ingredients'));
 
+/* ******************************
+ * Use route for CSE-Project-2/nutrition
+ * ******************************/
+router.use('/nutrition', require('./nutrition'));
+
 
 
 module.exports = router;
