@@ -4,11 +4,17 @@ GET http://localhost:3000/recipes
 ### GET Request All Ingredients
 GET http://localhost:3000/ingredients
 
+### GET Request All Nutrition
+GET http://localhost:3000/nutrition
+
 ### GET Request Single Recipe by ID
 GET http://localhost:3000/recipes/6740f33444fafe77814e3a84
 
 ### GET Request Single Ingredient by ID
 GET http://localhost:3000/ingredients/
+
+### GET Request Single Nutrition by ID
+GET http://localhost:3000/nutrition/
 
 ### POST Create New Recipe
 POST http://localhost:3000/recipes HTTP/1.1
@@ -44,6 +50,30 @@ Content-Type: application/json
    "ingredient_quantity": "2",
    "ingredient_unit": "lb",
    "recipe_id": "6740ed98d64cd6e43df1d"
+}
+
+### POST Create New Nutrition
+POST http://localhost:3000/nutrition HTTP/1.1
+Content-Type: application/json
+
+{
+        "calories": "193",
+        "calories_unit": "kcal",
+        "polyunsaturated_fat": "1",
+        "polyunsaturated_fat_unit": "g",
+        "potassium": "572",
+        "potassium_unit": "mg",       
+        "carbohydrates": "11",
+        "carbohydrates_unit": "g",
+        "monounsaturated_fat": "2",
+        "monounsaturated_fat_unit": "g",
+        "fiber": "1",
+        "fiber_unit": "g",
+        "protein": "26",
+        "protein_unit": "g",
+        "fat": "5",
+        "fat_unit": "g",
+        "recipe_id": "6740ed98d64cd6e43df1d24a"
 }
 
 ### PUT Update Recipe by ID
