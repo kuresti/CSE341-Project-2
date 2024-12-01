@@ -41,7 +41,7 @@ router.put('/:id',
  * *******************************/
 router.delete('/:id', 
     isAuthenticated,
-    hingredientsCont.deleteIngredient);
+    ingredientsCont.deleteIngredient);
 
 router.use(handleErrors)
 module.exports = router;
