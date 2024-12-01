@@ -6,37 +6,43 @@ const router = express.Router();
 const recipesCont = require('../controllers/recipes');
 const validate = require('../validation/validate');
 const { handleErrors } = require('../utilities/validation');
+const { isAuthenticated } = require('../utilities/authenticate');
 
 
 /* *******************************
  * Get Routes
  * *******************************/
-router.get('/', handleErrors(recipesCont.getAll));
+router.get('/', recipesCont.getAll);
 
-router.get('/:id', handleErrors(recipesCont.getSingle));
+router.get('/:id', recipesCont.getSingle);
 
 /* *******************************
  * POST Routes
  * *******************************/
 router.post(
     '/', 
+    isAuthenticated,
     validate.recipesRules(),
     validate.validateRecipes,
-    handleErrors(recipesCont.createNewRecipe)
+    recipesCont.createNewRecipe
 )
 
 /* *******************************
  * PUT Routes
  * *******************************/
 router.put('/:id', 
+    isAuthenticated,
     validate.recipesRules(),
     validate.validateRecipes,
-    handleErrors(recipesCont.updateRecipe)
+    recipesCont.updateRecipe
 )
 
 /* *******************************
  * DELETE Routes
  * *******************************/
-router.delete('/:id', handleErrors(recipesCont.deleteRecipe));
+router.delete('/:id', 
+    isAuthenticated,
+    recipesCont.deleteRecipe)
 
+router.use(handleErrors)
 module.exports = router;
