@@ -5,10 +5,10 @@
     "description": "Recipe API",
     "version": "1.0.0"
   },
-  "host": "cse341-project-2-u3rb.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
@@ -92,6 +92,9 @@
           },
           "500": {
             "description": "Internal Server Error"
+          },
+          "401": {
+            "description": "You do not have access. Please login to continue."
           }
         }
       }
