@@ -6,36 +6,42 @@ const router = express.Router();
 const ingredientsCont = require('../controllers/ingredients');
 const validate = require('../validation/validate');
 const { handleErrors } = require('../utilities/validation');
+const { isAuthenticated } = require('../utilities/authenticate');
 
 /* *******************************
  * Get Routes
  * *******************************/
-router.get('/', handleErrors(ingredientsCont.getAll));
+router.get('/', ingredientsCont.getAll);
 
-router.get('/:id', handleErrors(ingredientsCont.getSingle));
+router.get('/:id', ingredientsCont.getSingle);
 
 /* *******************************
  * POST Routes
  * *******************************/
 router.post(
     '/', 
+    isAuthenticated,
     validate.ingredientsRules(),
     validate.validateIngredient,
-    handleErrors(ingredientsCont.createNewIngredient)
+    ingredientsCont.createNewIngredient
 )
 
 /* *******************************
  * PUT Routes
  * *******************************/
 router.put('/:id', 
+    isAuthenticated,
     validate.ingredientsRules(),
     validate.validateIngredient,
-    handleErrors(ingredientsCont.updateIngredient)
+    ingredientsCont.updateIngredient
 )
 
 /* *******************************
  * DELETE Routes
  * *******************************/
-router.delete('/:id', handleErrors(ingredientsCont.deleteIngredient));
+router.delete('/:id', 
+    isAuthenticated,
+    hingredientsCont.deleteIngredient);
 
+router.use(handleErrors)
 module.exports = router;
